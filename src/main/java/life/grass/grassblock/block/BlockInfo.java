@@ -8,10 +8,12 @@ import life.grass.grassblock.GrassBlock;
 public class BlockInfo {
 
     private int index;
+    private String worldName;
     private String json = "{}";
 
-    public BlockInfo(int index){
+    public BlockInfo(int index, String worldName){
         this.index = index;
+        this.worldName = worldName;
     }
 
     public String getJson(){

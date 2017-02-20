@@ -45,16 +45,8 @@ public final class GrassBlock extends JavaPlugin {
             Gson gson = new Gson();
             String json = GrassDBAccess.instance.selectString("block", "", "indexlist", "index=\'" + s + "\'", "json");
             List<Integer> l = gson.fromJson(json, List.class);
-            if(l.size() < 10000) {
-                l.forEach(i -> {
-                    blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index=" + i, "json"));
-                });
-            }
-            else {
-                l.parallelStream().forEach(i -> {
-                    blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index=" + i, "json"));
-                });
-            }
+            if(l.size() < 10000)    l.forEach(i -> blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index=" + i, "json")));
+            else    l.parallelStream().forEach(i -> blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index=" + i, "json")));
         });
     }
 
@@ -67,9 +59,7 @@ public final class GrassBlock extends JavaPlugin {
             List<BlockInfo> l2 = blockManager.getBlockListMap().get(s);
             if(l1==null)    return;
             GrassDBAccess.instance.updateString("block", "indexlist", s, gson.toJson(l1), "index=\'" + s + "\'");
-            l2.forEach(b -> {
-                GrassDBAccess.instance.updateString("block", s, b.getIndex(), gson.toJson(b.getJson()), "index=" + b.getIndex());
-            });
+            l2.forEach(b -> GrassDBAccess.instance.updateString("block", s, b.getIndex(), gson.toJson(b.getJson()), "index=" + b.getIndex()));
         });
     }
 

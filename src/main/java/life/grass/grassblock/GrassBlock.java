@@ -1,6 +1,9 @@
 package life.grass.grassblock;
 
+import life.grass.grassblock.block.BlockManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.stream.IntStream;
 
 public final class GrassBlock extends JavaPlugin {
 
@@ -12,6 +15,7 @@ public final class GrassBlock extends JavaPlugin {
     public static final int z_max = 999;
 
     private static GrassBlock instance;
+    public BlockManager blockManager;
 
     public GrassBlock getInstance(){
         return instance;
@@ -21,6 +25,7 @@ public final class GrassBlock extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         instance = this;
+        blockManager = new BlockManager();
     }
 
     @Override

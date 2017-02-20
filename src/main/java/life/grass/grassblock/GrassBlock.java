@@ -1,5 +1,6 @@
 package life.grass.grassblock;
 
+import com.google.gson.Gson;
 import life.grass.grassDBAccess.GrassDBAccess;
 import life.grass.grassblock.block.BlockInfo;
 import life.grass.grassblock.block.BlockManager;
@@ -7,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
@@ -39,8 +41,14 @@ public final class GrassBlock extends JavaPlugin {
         worldNameList = new ArrayList<>();
         worldNameList.add("overworld");
         blockManager = new BlockManager();
-        int ret = grassDBAccess.selectInt("block", null, "info", "index=1", "json");
-
+        String json = GrassDBAccess.instance.selectString("block", "", "indexlist", "id=1", "json");
+        Gson gson = new Gson();
+        Map<String, List<Integer>> stringIntegerMap = gson.fromJson(json, Map.class);
+        stringIntegerMap.forEach((s, l) -> {
+            l.forEach(i -> {
+                blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index="+i, "json"));
+            });
+        });
     }
 
     @Override

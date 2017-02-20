@@ -25,11 +25,11 @@ public class BlockManager {
         return indexListMap;
     }
 
-    public void registerBlockInfo(int x, int y, int z, String worldName){
-        registerBlockInfo(GrassBlock.transIndex(x, y, z), worldName);
+    public BlockInfo registerBlockInfo(int x, int y, int z, String worldName){
+        return registerBlockInfo(GrassBlock.transIndex(x, y, z), worldName);
     }
 
-    public void registerBlockInfo(int index, String worldName){
+    public BlockInfo registerBlockInfo(int index, String worldName){
         if(blockListMap.get(worldName) == null){
             List<BlockInfo> blockList = new ArrayList<>();
             List<Integer> indexList = new ArrayList<>();
@@ -42,6 +42,7 @@ public class BlockManager {
             blockListMap.get(worldName).add(index, new BlockInfo(index, worldName));
             indexListMap.get(worldName).add(index);
         }
+        return blockListMap.get(worldName).get(index);
     }
 
     public void unregisterBlockInfo(int x, int y, int z, String worldName){

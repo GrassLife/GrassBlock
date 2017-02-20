@@ -11,6 +11,11 @@ public class BlockInfo {
     private String worldName;
     private String json = "{}";
 
+    public BlockInfo(int x, int y, int z, String worldName){
+        this.index = GrassBlock.transIndex(x, y, z);
+        this.worldName = worldName;
+    }
+
     public BlockInfo(int index, String worldName){
         this.index = index;
         this.worldName = worldName;

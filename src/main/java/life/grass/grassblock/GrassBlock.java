@@ -40,25 +40,6 @@ public final class GrassBlock extends JavaPlugin {
         worldNameList.add("overworld");
         blockManager = new BlockManager();
         int ret = grassDBAccess.selectInt("block", null, "info", "index=1", "json");
-        if(ret == -1){
-            IntStream.range(0, (x_max-x_min)*(y_max-y_min)*(z_max-z_min)).parallel().forEach(i -> {
-                worldNameList.forEach(worldName -> {
-                    blockManager.getBlockList().add(i, new BlockInfo(i, worldName));
-                    grassDBAccess.insertInitialInt("block", "info", i);
-                });
-            });
-        }
-        else if(ret == -2){
-            logger.warning("DB読み込みで異常が発生しました");
-        }
-        else {
-            IntStream.range(0, (x_max-x_min)*(y_max-y_min)*(z_max-z_min)).parallel().forEach(i -> {
-                worldNameList.forEach(worldName -> {
-                    blockManager.getBlockList().add(i, new BlockInfo(i, worldName));
-                    blockManager.getBlockList().get(i).setJson(grassDBAccess.selectString("block", null, "info", "index=" + i, "json"));
-                });
-            });
-        }
 
     }
 

@@ -21,7 +21,7 @@ public class BlockManager {
         return blockListMap;
     }
 
-    public Map<String, List<Integer>> getIndexList(){
+    public Map<String, List<Integer>> getIndexListMap(){
         return indexListMap;
     }
 

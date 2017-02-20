@@ -21,6 +21,10 @@ public class BlockInfo {
         this.worldName = worldName;
     }
 
+    public int getIndex(){
+        return index;
+    }
+
     public String getJson(){
         return json;
     }

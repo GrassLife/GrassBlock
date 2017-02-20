@@ -45,9 +45,16 @@ public final class GrassBlock extends JavaPlugin {
         Gson gson = new Gson();
         Map<String, List<Integer>> stringIntegerMap = gson.fromJson(json, Map.class);
         stringIntegerMap.forEach((s, l) -> {
-            l.forEach(i -> {
-                blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index="+i, "json"));
-            });
+            if(l.size() < 10000) {
+                l.forEach(i -> {
+                    blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index=" + i, "json"));
+                });
+            }
+            else {
+                l.parallelStream().forEach(i -> {
+                    blockManager.registerBlockInfo(i, s).setJson(GrassDBAccess.instance.selectString("block", "", s, "index=" + i, "json"));
+                });
+            }
         });
     }
 

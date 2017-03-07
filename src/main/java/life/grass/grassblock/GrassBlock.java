@@ -25,7 +25,7 @@ public final class GrassBlock extends JavaPlugin {
 
     private static GrassBlock instance;
     private List<String> worldNameList;
-    public BlockManager blockManager;
+    private static BlockManager blockManager;
     public GrassDBAccess grassDBAccess = GrassDBAccess.instance;
 
 
@@ -65,5 +65,9 @@ public final class GrassBlock extends JavaPlugin {
 
     public static int transIndex(int x, int y, int z){
         return (x-x_min) + (z-z_min)*(x_max-x_min) + (y-y_min)*(x_max-x_min)*(z_max-z_min);
+    }
+
+    public static BlockManager getBlockManager(){
+        return blockManager;
     }
 }

@@ -2,6 +2,7 @@ package life.grass.grassblock.block;
 
 import javafx.collections.transformation.SortedList;
 import life.grass.grassblock.GrassBlock;
+import org.bukkit.block.Block;
 
 import java.util.*;
 
@@ -25,6 +26,10 @@ public class BlockManager {
         return indexListMap;
     }
 
+    public BlockInfo registerBlockInfo(Block block){
+        return registerBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld().toString());
+    }
+
     public BlockInfo registerBlockInfo(int x, int y, int z, String worldName){
         return registerBlockInfo(GrassBlock.transIndex(x, y, z), worldName);
     }
@@ -43,6 +48,10 @@ public class BlockManager {
             indexListMap.get(worldName).add(index);
         }
         return blockListMap.get(worldName).get(index);
+    }
+
+    public void unregisterBlockInfo(Block block){
+        unregisterBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld().toString());
     }
 
     public void unregisterBlockInfo(int x, int y, int z, String worldName){

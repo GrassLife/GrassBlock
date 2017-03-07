@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="GrassDBAccess">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../GrassDBAccess/out/artifacts/GrassDBAccess/GrassDBAccess.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../GrassDBAccess/out/artifacts/GrassDBAccess/GrassDBAccess.jar!/src/main/java" />
+    </SOURCES>
+  </library>
+</component>

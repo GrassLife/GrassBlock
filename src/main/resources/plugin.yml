@@ -1,3 +1,0 @@
-name: GrassBlock
-version: ${project.version}
-main: life.grass.grassblock.GrassBlock

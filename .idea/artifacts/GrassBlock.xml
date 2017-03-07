@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="GrassBlock">
-    <output-path>$PROJECT_DIR$/out/artifacts/GrassBlock</output-path>
-    <root id="archive" name="GrassBlock.jar">
-      <element id="module-output" name="GrassBlock" />
-      <element id="library" level="project" name="GrassDBAccess" />
-    </root>
-  </artifact>
-</component>

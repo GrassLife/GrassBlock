@@ -2,6 +2,7 @@ package life.grass.grassblock.block;
 
 import javafx.collections.transformation.SortedList;
 import life.grass.grassblock.GrassBlock;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 
 import java.util.*;
@@ -10,59 +11,45 @@ import java.util.*;
  * Created by gurapomu on 2017/02/20.
  */
 public class BlockManager {
-    private Map<String, List<BlockInfo>> blockListMap;
-    private Map<String, List<Integer>> indexListMap;
+    private Map<World, Map<Integer, BlockInfo>> blockMap;
 
     public BlockManager(){
-        blockListMap = new HashMap<>();
-        indexListMap = new HashMap<>();
+        blockMap = new HashMap<>();
     }
 
-    public Map<String, List<BlockInfo>> getBlockListMap(){
-        return blockListMap;
-    }
-
-    public Map<String, List<Integer>> getIndexListMap(){
-        return indexListMap;
+    public Map<World, Map<Integer, BlockInfo>> getBlockMap(){
+        return blockMap;
     }
 
     public BlockInfo registerBlockInfo(Block block){
-        return registerBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld().toString());
+        return registerBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld());
     }
 
-    public BlockInfo registerBlockInfo(int x, int y, int z, String worldName){
-        return registerBlockInfo(GrassBlock.transIndex(x, y, z), worldName);
+    public BlockInfo registerBlockInfo(int x, int y, int z, World world){
+        return registerBlockInfo(GrassBlock.transIndex(x, y, z), world);
     }
 
-    public BlockInfo registerBlockInfo(int index, String worldName){
-        if(blockListMap.get(worldName) == null){
-            List<BlockInfo> blockList = new ArrayList<>();
-            List<Integer> indexList = new ArrayList<>();
-            blockList.add(new BlockInfo(index, worldName));
-            indexList.add(index);
-            blockListMap.put(worldName, blockList);
-            indexListMap.put(worldName, indexList);
+    public BlockInfo registerBlockInfo(int index, World world){
+        if(blockMap.get(world) == null){
+            Map<Integer, BlockInfo> indexMap = new HashMap<>();
+            indexMap.put(index, new BlockInfo(index, world));
+            blockMap.put(world, indexMap);
         }
         else {
-            blockListMap.get(worldName).add(index, new BlockInfo(index, worldName));
-            indexListMap.get(worldName).add(index);
+            blockMap.get(world).put(index, new BlockInfo(index, world));
         }
-        return blockListMap.get(worldName).get(index);
+        return blockMap.get(world).get(index);
     }
 
     public void unregisterBlockInfo(Block block){
-        unregisterBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld().toString());
+        unregisterBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld());
     }
 
-    public void unregisterBlockInfo(int x, int y, int z, String worldName){
-        unregisterBlockInfo(GrassBlock.transIndex(x, y, z), worldName);
+    public void unregisterBlockInfo(int x, int y, int z, World world){
+        unregisterBlockInfo(GrassBlock.transIndex(x, y, z), world);
     }
 
-    public void unregisterBlockInfo(int index, String worldName){
-        if(blockListMap.get(worldName)==null)   return;
-        else{
-            blockListMap.get(worldName).remove(index);
-            indexListMap.get(worldName).remove((Integer)index);
-        }
+    public void unregisterBlockInfo(int index, World world){
+        if(blockMap.get(world)!=null)   blockMap.get(world).remove(index);
     }
 }

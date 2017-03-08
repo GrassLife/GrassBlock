@@ -1,6 +1,7 @@
 package life.grass.grassblock.block;
 
 import life.grass.grassblock.GrassBlock;
+import org.bukkit.World;
 
 /**
  * Created by gurapomu on 2017/02/20.
@@ -8,21 +9,25 @@ import life.grass.grassblock.GrassBlock;
 public class BlockInfo {
 
     private int index;
-    private String worldName;
+    private World world;
     private String json = "{}";
 
-    public BlockInfo(int x, int y, int z, String worldName){
+    public BlockInfo(int x, int y, int z, World world){
         this.index = GrassBlock.transIndex(x, y, z);
-        this.worldName = worldName;
+        this.world = world;
     }
 
-    public BlockInfo(int index, String worldName){
+    public BlockInfo(int index, World world){
         this.index = index;
-        this.worldName = worldName;
+        this.world = world;
     }
 
     public int getIndex(){
         return index;
+    }
+
+    public World getWorld() {
+        return this.world;
     }
 
     public String getJson(){

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public final class GrassBlock extends JavaPlugin {
@@ -41,10 +42,10 @@ public final class GrassBlock extends JavaPlugin {
         blockManager = new BlockManager();
         worldNameList.forEach(s -> {
             Gson gson = new Gson();
-            String json = GrassDBAccess.getInstance().selectString("block", "", "indexlist", "index_int=\'" + s + "\'", "json_str");
-            List<Integer> l = gson.fromJson(json, List.class);
-            if(l.size() < 10000)    l.forEach(i -> blockManager.registerBlockInfo(i, s).setJson(grassDBAccess.selectString("block", "", s.toString(), "index_int=" + i, "json_str")));
-            else    l.parallelStream().forEach(i -> blockManager.registerBlockInfo(i, s).setJson(grassDBAccess.selectString("block", "", s.toString(), "index=_int" + i, "json_str")));
+            String json = GrassDBAccess.getInstance().selectString("block", "", "indexlist", "index_str=\'" + s + "\'", "json_str");
+            Set<Integer> set = gson.fromJson(json, Set.class);
+            if(set.size() < 10000)    set.forEach(i -> blockManager.registerBlockInfo(i, s).setJson(grassDBAccess.selectString("block", "", s.toString(), "index_int=" + i, "json_str")));
+            else    set.parallelStream().forEach(i -> blockManager.registerBlockInfo(i, s).setJson(grassDBAccess.selectString("block", "", s.toString(), "index=_int" + i, "json_str")));
         });
     }
 

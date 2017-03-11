@@ -4,12 +4,11 @@ import com.google.gson.Gson;
 import life.grass.grassDBAccess.GrassDBAccess;
 import life.grass.grassblock.block.BlockInfo;
 import life.grass.grassblock.block.BlockManager;
+import life.grass.grassblock.event.BlockJsonSaveEvent;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 public final class GrassBlock extends JavaPlugin {
@@ -39,13 +38,17 @@ public final class GrassBlock extends JavaPlugin {
         logger = getLogger();
         instance = this;
         worldNameList = this.getServer().getWorlds();
+        getServer().getPluginManager().registerEvents(new BlockJsonSaveEvent(), this);
         blockManager = new BlockManager();
         worldNameList.forEach(s -> {
             Gson gson = new Gson();
-            String json = GrassDBAccess.getInstance().selectString("block", "", "indexlist", "index_str=\'" + s + "\'", "json_str");
-            Set<Integer> set = gson.fromJson(json, Set.class);
-            if(set.size() < 10000)    set.forEach(i -> blockManager.registerBlockInfo(i, s).setJson(grassDBAccess.selectString("block", "", s.toString(), "index_int=" + i, "json_str")));
-            else    set.parallelStream().forEach(i -> blockManager.registerBlockInfo(i, s).setJson(grassDBAccess.selectString("block", "", s.toString(), "index=_int" + i, "json_str")));
+            String json = GrassDBAccess.getInstance().selectString("block", null, "indexlist", "index_str=\'" + s.getName() + "\'", "json_str");
+//            System.out.println(json);
+            Set<Double> set = gson.fromJson(json, Set.class);
+            set.forEach(i -> {
+                String str = grassDBAccess.selectString("block", null, s.getName(), "index_int=" + i.intValue(), "json_str");
+                blockManager.registerBlockInfo(i.intValue(), s).setJson(str);
+            });
         });
     }
 
@@ -56,8 +59,11 @@ public final class GrassBlock extends JavaPlugin {
         worldNameList.forEach(s -> {
             Map<Integer, BlockInfo> m = blockManager.getBlockMap().get(s);
             if(m==null)    return;
-            grassDBAccess.updateString("block", "indexlist", s.toString(), "json_str" , gson.toJson(m.keySet()), "index_str=\'" + s + "\'");
-            m.forEach((i, b) -> grassDBAccess.updateString("block", s.toString(), i, "json_str", gson.toJson(b.getJson()), "index_int=" + i));
+            grassDBAccess.updateString("block", "indexlist", s.getName(), "json_str" , gson.toJson(m.keySet()), "index_str=\'" + s.getName() + "\'");
+            m.forEach((i, b) -> {
+                System.out.println(b.getJson());
+                grassDBAccess.updateString("block", s.getName(), i, "json_str", b.getJson(), "index_int=" + i);
+            });
         });
     }
 

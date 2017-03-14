@@ -26,7 +26,7 @@ public final class GrassBlock extends JavaPlugin {
 
     private static GrassBlock instance;
     private List<World> worldNameList;
-    private BukkitTask blockDataSaveTimerTask = null;
+//    private BukkitTask blockDataSaveTimerTask = null;
     private static BlockManager blockManager;
     public static GrassDBAccess grassDBAccess;
 
@@ -41,34 +41,34 @@ public final class GrassBlock extends JavaPlugin {
         logger = getLogger();
         instance = this;
         worldNameList = this.getServer().getWorlds();
-        getServer().getPluginManager().registerEvents(new BlockJsonSaveEvent(), this);
-        blockDataSaveTimerTask = this.getServer().getScheduler().runTaskTimer(this, new BlockDataSaveTimer(this), 20L*30, 20L*30);
+//        getServer().getPluginManager().registerEvents(new BlockJsonSaveEvent(), this);
+//        blockDataSaveTimerTask = this.getServer().getScheduler().runTaskTimer(this, new BlockDataSaveTimer(this), 20L*30, 20L*30);
         blockManager = new BlockManager();
         worldNameList.forEach(s -> {
-            Gson gson = new Gson();
-            String json = GrassDBAccess.getInstance().selectString("block", null, "indexlist", "index_str=\'" + s.getName() + "\'", "json_str");
-//            System.out.println(json);
-            Set<Double> set = gson.fromJson(json, Set.class);
-            set.forEach(i -> {
-                String str = grassDBAccess.selectString("block", null, s.getName(), "index_int=" + i.intValue(), "json_str");
-                blockManager.registerBlockInfo(i.intValue(), s).setJson(str);
-            });
+//            Gson gson = new Gson();
+//            String json = GrassDBAccess.getInstance().selectString("block", null, "indexlist", "index_str=\'" + s.getName() + "\'", "json_str");
+////            System.out.println(json);
+//            Set<Double> set = gson.fromJson(json, Set.class);
+//            set.forEach(i -> {
+//                String str = grassDBAccess.selectString("block", null, s.getName(), "index_int=" + i.intValue(), "json_str");
+//                blockManager.registerBlockInfo(i.intValue(), s).setJson(str);
+//            });
         });
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        Gson gson = new Gson();
-        worldNameList.forEach(s -> {
-            Map<Integer, BlockInfo> m = blockManager.getBlockMap().get(s);
-            if(m==null)    return;
-            grassDBAccess.updateString("block", "indexlist", s.getName(), "json_str" , gson.toJson(m.keySet()), "index_str=\'" + s.getName() + "\'");
-            m.forEach((i, b) -> {
-                System.out.println(b.getJson());
-                grassDBAccess.updateString("block", s.getName(), i, "json_str", b.getJson(), "index_int=" + i);
-            });
-        });
+//        Gson gson = new Gson();
+//        worldNameList.forEach(s -> {
+//            Map<Integer, BlockInfo> m = blockManager.getBlockMap().get(s);
+//            if(m==null)    return;
+//            grassDBAccess.updateString("block", "indexlist", s.getName(), "json_str" , gson.toJson(m.keySet()), "index_str=\'" + s.getName() + "\'");
+//            m.forEach((i, b) -> {
+//                System.out.println(b.getJson());
+//                grassDBAccess.updateString("block", s.getName(), i, "json_str", b.getJson(), "index_int=" + i);
+//            });
+//        });
     }
 
     public static int transIndex(int x, int y, int z){

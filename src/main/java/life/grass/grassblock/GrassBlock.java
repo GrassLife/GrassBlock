@@ -5,8 +5,10 @@ import life.grass.grassDBAccess.GrassDBAccess;
 import life.grass.grassblock.block.BlockInfo;
 import life.grass.grassblock.block.BlockManager;
 import life.grass.grassblock.event.BlockJsonSaveEvent;
+import life.grass.grassblock.timer.BlockDataSaveTimer;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -24,6 +26,7 @@ public final class GrassBlock extends JavaPlugin {
 
     private static GrassBlock instance;
     private List<World> worldNameList;
+    private BukkitTask blockDataSaveTimerTask = null;
     private static BlockManager blockManager;
     public static GrassDBAccess grassDBAccess;
 
@@ -39,6 +42,7 @@ public final class GrassBlock extends JavaPlugin {
         instance = this;
         worldNameList = this.getServer().getWorlds();
         getServer().getPluginManager().registerEvents(new BlockJsonSaveEvent(), this);
+        blockDataSaveTimerTask = this.getServer().getScheduler().runTaskTimer(this, new BlockDataSaveTimer(this), 20L*30, 20L*30);
         blockManager = new BlockManager();
         worldNameList.forEach(s -> {
             Gson gson = new Gson();

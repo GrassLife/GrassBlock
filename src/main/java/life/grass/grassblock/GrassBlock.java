@@ -1,7 +1,7 @@
 package life.grass.grassblock;
 
 import com.google.gson.Gson;
-import life.grass.grassDBAccess.GrassDBAccess;
+//import life.grass.grassDBAccess.GrassDBAccess;
 import life.grass.grassblock.block.BlockInfo;
 import life.grass.grassblock.block.BlockManager;
 import life.grass.grassblock.event.BlockJsonSaveEvent;
@@ -28,7 +28,7 @@ public final class GrassBlock extends JavaPlugin {
     private List<World> worldNameList;
 //    private BukkitTask blockDataSaveTimerTask = null;
     private static BlockManager blockManager;
-    public static GrassDBAccess grassDBAccess;
+//    public static GrassDBAccess grassDBAccess;
 
     public GrassBlock getInstance(){
         return instance;
@@ -36,7 +36,7 @@ public final class GrassBlock extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        grassDBAccess = GrassDBAccess.getInstance();
+//        grassDBAccess = GrassDBAccess.getInstance();
         // Plugin startup logic
         logger = getLogger();
         instance = this;

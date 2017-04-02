@@ -41,6 +41,14 @@ public class BlockManager {
         return blockMap.get(world).get(index);
     }
 
+    public BlockInfo getBlockInfo(int x, int y, int z, World world){
+        return getBlockInfo(GrassBlock.transIndex(x, y, z), world);
+    }
+
+    public BlockInfo getBlockInfo(int index, World world){
+        return getBlockMap().get(world).get(index);
+    }
+
     public void unregisterBlockInfo(Block block){
         unregisterBlockInfo(block.getX(), block.getY(), block.getZ(), block.getWorld());
     }

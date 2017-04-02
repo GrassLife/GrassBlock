@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2415763c-6f04-48d7-a7cc-ad38bda19771" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/GrassBlock/GrassBlock.jar" afterPath="$PROJECT_DIR$/out/artifacts/GrassBlock/GrassBlock.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="2415763c-6f04-48d7-a7cc-ad38bda19771" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -801,7 +798,53 @@
       <option name="project" value="LOCAL" />
       <updated>1489472124615</updated>
     </task>
+<<<<<<< Updated upstream
     <option name="localTasksCounter" value="22" />
+=======
+    <task id="LOCAL-00022" summary="[update] jar">
+      <created>1489474274147</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1489474274149</updated>
+    </task>
+    <task id="LOCAL-00023" summary="[update] 連携用commit">
+      <created>1489474435565</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1489474435565</updated>
+    </task>
+    <task id="LOCAL-00024" summary="[update] jar">
+      <created>1490267597241</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1490267597241</updated>
+    </task>
+    <task id="LOCAL-00025" summary="[update] jar">
+      <created>1490267615282</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1490267615282</updated>
+    </task>
+    <task id="LOCAL-00026" summary="[add] getBlockInfo">
+      <created>1491141795302</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1491141795303</updated>
+    </task>
+    <task id="LOCAL-00027" summary="[add] getBlockInfo">
+      <created>1491141835264</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1491141835264</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="ToolWindowManager">

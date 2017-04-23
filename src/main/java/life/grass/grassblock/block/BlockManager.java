@@ -60,4 +60,13 @@ public class BlockManager {
     public void unregisterBlockInfo(int index, World world){
         if(blockMap.get(world)!=null)   blockMap.get(world).remove(index);
     }
+
+    public boolean isExistGrassBlock(int x, int y, int z, World world){
+        return isExistGrassBlock(GrassBlock.transIndex(x, y, z), world);
+    }
+
+    public boolean isExistGrassBlock(int index, World world){
+        if(blockMap.get(world).get(index) == null)  return false;
+        return true;
+    }
 }

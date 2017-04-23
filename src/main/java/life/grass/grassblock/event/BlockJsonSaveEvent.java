@@ -1,6 +1,5 @@
 package life.grass.grassblock.event;
 
-import life.grass.grassDBAccess.GrassDBAccess;
 import life.grass.grassblock.GrassBlock;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
